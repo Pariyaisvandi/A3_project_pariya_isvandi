@@ -27,8 +27,8 @@ from sklearn.model_selection import GridSearchCV
 
 gs=GridSearchCV(model,my_params,cv=kf,scoring='accuracy')
 gs.fit(x,y)
-gs.best_score_
-gs.best_params_
+print(gs.best_score_)
+print(gs.best_params_)
 
 
 
