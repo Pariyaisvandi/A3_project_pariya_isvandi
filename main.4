@@ -1,0 +1,110 @@
+#project 3 
+#pariya_isvandi
+
+from sklearn.datasets import load_breast_cancer
+data=load_breast_cancer()
+x=data.data
+y=data.target
+
+data.feature_names
+
+data.target_names
+
+#==============================================================
+#KNeighborsClassifier
+#----------EXAMPLE-------
+from sklearn.model_selection import KFold
+kf= KFold(n_splits=5,shuffle=True,random_state=42)
+
+#-----MODEL SELECTION
+from sklearn.neighbors import KNeighborsClassifier
+model=KNeighborsClassifier()
+my_params= { 'n_neighbors':[3,5,7,8,9],
+            'metric':['minkowski'  , 'euclidean' , 'manhattan'],
+           'weights':['uniform','distance']}
+
+from sklearn.model_selection import GridSearchCV
+
+gs=GridSearchCV(model,my_params,cv=kf,scoring='accuracy')
+gs.fit(x,y)
+
+print(gs.best_score_)
+#0.9419810588417947
+
+print(gs.best_params_)
+#{'metric': 'manhattan', 'n_neighbors': 5, 'weights': 'uniform'}
+
+#================================================================
+#SVC
+
+from sklearn.model_selection import KFold
+kf= KFold(n_splits=5,shuffle=True , random_state=42) 
+
+from sklearn.svm import SVC
+model=SVC()
+
+my_params={ 'kernel':['poly','rbf']}
+
+from sklearn.model_selection import GridSearchCV
+
+gs=GridSearchCV(model,my_params,cv=kf,scoring='accuracy',return_train_score=True)
+
+gs.fit(x,y)
+
+print(gs.best_score_)
+#0.9173109765564353
+
+print(gs.best_params_)
+#{'kernel': 'rbf'}
+#=================================================================
+#DecisionTree
+from sklearn.model_selection import KFold
+kf= KFold(n_splits=5,shuffle=True , random_state=42) 
+
+from sklearn.tree import DecisionTreeRegressor
+model=DecisionTreeRegressor(random_state=42)
+
+my_params={ 'max_depth':[1,2,3,4,5,6,7,10]}
+
+model=DecisionTreeClassifier(max_depth=1,random_state=42)
+
+from sklearn.model_selection import GridSearchCV
+
+gs=GridSearchCV(model,my_params,cv=kf,scoring='accuracy')
+
+gs.fit(x,y)
+
+print(gs.best_score_)
+#0.9472752678155565
+
+print(gs.best_params_)
+#{'max_depth': 4}
+
+#=================================================================
+#error zad vali gozashtamesh
+#RandomForest
+from sklearn.model_selection import KFold
+kf= KFold(n_splits=5,shuffle=True,random_state=42)
+
+from sklearn.ensemble import RandomForestClassifier
+model=RandomForestClassifier(random_state=42,n_estimators=40)
+
+my_params= { 'n_neighbors':[3,5,7,8,9],
+            'metric':['minkowski'  , 'euclidean' , 'manhattan'],
+           'weights':['uniform','distance']}
+
+from sklearn.model_selection import GridSearchCV
+
+gs=GridSearchCV(model,my_params,cv=kf,scoring='accuracy')
+gs.fit(x,y)
+
+print(gs.best_score_)
+
+print(gs.best_params_)
+ 
+#=================================================================
+
+natije:
+dar nahayat model entekhabe DecisionTree hast
+ 
+
